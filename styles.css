@@ -21,4 +21,22 @@ body {
 
 .slider {
     width: 500px; /* Width of the outside container */
-  }
+}
+
+.settings {
+    width: 200px; /* Width of the outside container */
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+
+input {
+    margin: 20px;
+}
+
+label {
+    margin: 20px;
+}

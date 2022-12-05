@@ -4,6 +4,8 @@
 
 let canvas = document.getElementById('canvas')
 var slider = document.getElementById("slider");
+var populationSlider = document.getElementById("population");
+var mutationSlider = document.getElementById("mutation");
 import {c, ctx} from "./modules/canvas.js";
 import {Object} from "./modules/object.js";
 import {DisplayNumber} from "./tools/numberDisplay.js";
@@ -18,9 +20,11 @@ var cWidth = c.width
 
 let gameFrame = 1
 let population = []
+let populationSize = 50 
 var generation = 0
 let selection
 let objective =1000
+let mutationSize = 0.1
 //==============================
 // _____|HANDLE OBJECTS| _____// 
 //==============================
@@ -32,13 +36,16 @@ function handleObjective(){
 
 function createPop(selection){
     population = []
-    for (let i = 0;i <50;i++){
+    for (let i = 0;i <populationSize;i++){
         if (generation == 1){
             population.push( new Object(20,cHeight,random(0,190),random(0,110)))
         }else {
-            var child = random(0,selection.length-1)
-            population.push(new Object(20,cHeight,selection[child].Vx,selection[child].Vy))
-            if (random(1,50) == 25){
+            var child1 = random(0,selection.length-1)
+            var child2 = random(0,selection.length-1)
+            var childVx = (selection[child1].Vx +selection[child2].Vx)/2
+            var childVy = (selection[child1].Vy +selection[child2].Vy)/2
+            population.push(new Object(20,cHeight,childVx,childVy))
+            if (random(0,0+mutationSize) == 1){
                 population[i].Vx = random(20,150)
                 population[i].Vy = random(20,80)
             }
@@ -93,13 +100,8 @@ function handleObject(gameFrame){
 
 play()
 
-function reset(){
-    gameFrame = 1
-    objectArray = []
-}
-
-
 function play(){
+
     generation += 1
     let continuer = false
     gameFrame =0
@@ -110,8 +112,8 @@ function play(){
         ctx.clearRect(0, 0, canvas.width, canvas.height)
     
         // HANDLE AND DRAW ALL
-        handleObject(gameFrame)
         handleObjective()
+        handleObject(gameFrame)
         // UPDATE 
         gameFrame ++
     
@@ -135,13 +137,25 @@ document.body.onkeyup = function(e) {
     ) {
         play()
     }
-  }
+}
 
-  slider.oninput = function() {
+function reset(){
+    generation = 0
+    gameFrame = 0
+}
+
+slider.oninput = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     handleObjective()
     handleObject(gameFrame)
-    generation = 0
-    gameFrame = 0
+    reset()
     objective = this.value;
-  }
+}
+
+populationSlider.oninput = function() {
+    reset()
+    populationSize = this.value;
+}
+
+//var populationSlider = document.getElementById("population");
+//var mutationSlider = document.getElementById("mutation");

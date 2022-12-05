@@ -11,10 +11,24 @@
 <body>
     <body>
 
+        <form>
+            <label for="population">Population</label><br>
+            <div class="slidecontainer">
+                <input type="range" min="1" max="150" value="50" class="settings" id="population">
+            </div><br>
+
+            <label for="mutation">mutation</label><br>
+            <div class="slidecontainer">
+                <input type="range" min="0" max="10" value="1" class="settings" id="mutation">
+            </div>
+        </form>
+
         <canvas id="canvas"></canvas>
+
         <div class="slidecontainer">
             <input type="range" min="1" max="1500" value="500" class="slider" id="slider">
-          </div>
+        </div>
+
         <script src="main.js" type="module"></script>
     </body>
 </body>
