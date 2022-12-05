@@ -26,6 +26,8 @@ class Object {
 
         this.stop = false
         this.score = 0
+
+        this.point = []
     }
 
     update(gameFrame){

@@ -11,8 +11,10 @@ import {Object} from "./modules/object.js";
 import {DisplayNumber} from "./tools/numberDisplay.js";
 import { collisionCheck } from "./tools/collisionCheck.js";
 import {random} from "./tools/random.js";
+import {drawCurve} from "./tools/drawCurve.js";
 var cHeight = c.height
 var cWidth = c.width
+var tension = 1;
 
 //=================================
 // _____|DECLARE VARIABLES| _____// 
@@ -89,6 +91,10 @@ function calculateScoreOfEachObject(){
 
 function handleObject(gameFrame){
     for (let i = 0; i <population.length; i++){
+        if (gameFrame%2 == 0){
+            population[i].point.push({x:population[i].x,y:population[i].y})
+        }
+        drawCurve(population[i].point, tension);
         population[i].update(gameFrame)
         population[i].draw()
     }
@@ -114,6 +120,7 @@ function play(){
         // HANDLE AND DRAW ALL
         handleObjective()
         handleObject(gameFrame)
+        //        //
         // UPDATE 
         gameFrame ++
     
