@@ -157,5 +157,10 @@ populationSlider.oninput = function() {
     populationSize = this.value;
 }
 
+
+mutationSlider.oninput = function() {
+    reset()
+    mutationSize = this.value;
+}
 //var populationSlider = document.getElementById("population");
 //var mutationSlider = document.getElementById("mutation");
