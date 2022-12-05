@@ -24,7 +24,7 @@ let populationSize = 50
 var generation = 0
 let selection
 let objective =1000
-let mutationSize = 0.1
+let mutationSize = 0
 //==============================
 // _____|HANDLE OBJECTS| _____// 
 //==============================
